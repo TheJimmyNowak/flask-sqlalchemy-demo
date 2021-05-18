@@ -1,14 +1,19 @@
 {% include 'base.html' %}
 {% block body %}
     <form method="post">
-        <input type="text" id="title" name="title"/>
-        <input type="text" id="text" name="text"/>
+        <input type="text" id="title" name="title"/></br>
+        <input type="text" id="text" name="text"/></br>
 
+        <select name="creator">
+            {% for i in users %}
+                <option value="{{ i }}">{{ i }}</option>
+            {% endfor %}
+        </select></br>
         <select name="category">
             {% for i in categories %}
                 <option value="{{ i }}">{{ i }}</option>
             {% endfor %}
-        </select>
+        </select></br>
         <input type="submit"/>
     </form>
 {% endblock %}

@@ -23,13 +23,29 @@ def add_user():
 @app.route('/vault/add', methods=['GET', 'POST'])
 def add_vault():
     if request.method == "GET":
-        return render_template('addvault.html', categories=TextVault.categories)
+        return render_template(
+            'addvault.html',
+            users=[str(i) for i in db.session.query(User)],
+            categories=TextVault.categories)
 
     db.session.add(TextVault(
         title=request.form['title'],
         text=request.form['text'],
-        category=request.form['category']
+        category=request.form['category'],
+        creator_id=User.query.filter_by(name=request.form['creator']).first().id
     ))
-    print('dupa')
     db.session.commit()
-    return "Yes"
+    return "Vault has been added"
+
+
+@app.route('/user/get')
+def get_user():
+    return render_template(
+        'getuser.html',
+        users=[str(i) for i in User.query.all()]
+    )
+
+
+@app.route('/vault/get')
+def get_vault():
+    pass

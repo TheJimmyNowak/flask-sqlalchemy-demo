@@ -1,0 +1,9 @@
+{% include 'base.html' %}
+
+{% block body %}
+    {% for i in users%}
+        <div class="card">
+            <span>Name: {{ i }}</span>
+        </div>
+    {% endfor %}
+{% endblock %}
